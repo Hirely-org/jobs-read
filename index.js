@@ -8,15 +8,16 @@ const port = 5001;
 
 const jobReadRouter = require('./routers/JobsReadRouter');
 
-const corsOptions = {
-    origin: ['http://localhost:3000', 'http://127.0.0.1:3000'],
+app.use(cors({
+    origin: true, // Allow all origins
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    allowedHeaders: '*',
     credentials: true,
-    maxAge: 86400 // CORS preflight cache time
-  };
+    preflightContinue: false
+  }));
   
-app.use(cors(corsOptions));
+  // Explicitly handle OPTIONS
+  app.options('*', cors());
 
 
 app.use(express.json());
