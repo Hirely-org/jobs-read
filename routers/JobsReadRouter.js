@@ -6,6 +6,12 @@ router.get('/', async (req, res) => {
     let jobs;
     try{
         jobs = await db.Job.findAll();
+
+        const userRole = req.headers['x-Forwarded-Role'];
+        const userIdentity = req.headers['x-Forwarded-User'];
+
+        // console.log("Headers: ", req.headers);
+
     } catch(error){
         console.error('Error getting jobs:', error);
         return res.status(500).send('Error getting jobs');
