@@ -8,13 +8,15 @@ const port = 5001;
 
 const jobReadRouter = require('./routers/JobsReadRouter');
 
-app.use(cors({
-    origin: 'http://localhost:3000', // Allow requests from Next.js
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true, // Allow cookies/auth headers if needed
-  }));
+const corsOptions = {
+    origin: ['http://localhost:3000', 'http://127.0.0.1:3000'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+    maxAge: 86400 // CORS preflight cache time
+  };
   
-app.options('*', cors()); // Handle preflight for all routes
+app.use(cors(corsOptions));
 
 
 app.use(express.json());
