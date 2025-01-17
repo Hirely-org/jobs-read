@@ -14,6 +14,9 @@ app.use(cors({
     credentials: true, // Allow cookies/auth headers if needed
   }));
   
+app.options('*', cors()); // Handle preflight for all routes
+
+
 app.use(express.json());
 app.use("/jobRead", jobReadRouter);
 
